@@ -3,22 +3,27 @@
 
 from jira import JIRA
 import TestConection
+import string
 
 
 def BoyerMooreHorspool(pattern, text):
     m = len(pattern)
     n = len(text)
-    if m > n: return -1
+    if m > n:
+        return -1
     skip = []
-    for k in range(256): skip.append(m)
-    for k in range(m - 1): skip[ord(pattern[k])] = m - k - 1
+    for k in range(256):
+        skip.append(m)
+    for k in range(m - 1):
+        skip[ord(pattern[k])] = m - k - 1
     skip = tuple(skip)
     k = m - 1
     while k < n:
         j = m - 1; i = k
         while j >= 0 and text[i] == pattern[j]:
             j -= 1; i -= 1
-        if j == -1: return i + 1
+        if j == -1:
+            return i + 1
         k += skip[ord(text[k])]
     return -1
 
@@ -27,7 +32,7 @@ if __name__ == '__main__':
 
     conexao = JIRA({'server': 'http://idart.mot.com'}, basic_auth=(TestConection.USERNAME, TestConection.PASSWORD))
 
-    issuekey = conexao.issue('IKSWN-8444')
+    issuekey = conexao.issue('IKSWN-10026')
     valor = issuekey.raw['fields']['comment']['total']
 
     i = 0
@@ -35,14 +40,15 @@ if __name__ == '__main__':
     lista = []
 
     while valor > i:
-        e = issuekey.raw['fields']['comment']['comments'][i]['body']
+        #e = issuekey.raw['fields']['comment']['comments'][i]['body']
         a = issuekey.raw['fields']['comment']['comments'][i]['updateAuthor']['name']
 
         if a == TestConection.USERNAME:
             comecar = i
             print 'comentario do dono na posicao: ', comecar
         i += 1
-        lista.insert(i, e)
+    print comecar
+        #lista.insert(i, e)
 
     cont = 0
 
@@ -52,8 +58,13 @@ if __name__ == '__main__':
     comecar += 1
 
     while qtddComentarios > comecar:
-        text = issue2.raw['fields']['comment']['comments'][comecar]['body']
+        text1 = issue2.raw['fields']['comment']['comments'][comecar]['body']
         #print 'COMENTARIO para comecar>>>>>>>>', text
+
+        safe_chars = string.ascii_letters + string.digits + ' ' + '?'
+        text = ''.join([char if char in safe_chars else '' for char in text1])
+
+        print text
 
         arq = open('words.txt', 'r')
         palavras = arq.readlines()

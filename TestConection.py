@@ -1,0 +1,3 @@
+
+USERNAME = "coreId"
+PASSWORD = "senha"
