@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 import AnaliseDeComentarios
 
+#comentario com caractere especial q da problema quando eh convertido
 comentario = 'first.！dfeufhewf?'
 
 #pattern = '?'
