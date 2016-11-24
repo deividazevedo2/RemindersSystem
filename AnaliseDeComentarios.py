@@ -32,7 +32,7 @@ if __name__ == '__main__':
 
     conexao = JIRA({'server': 'http://idart.mot.com'}, basic_auth=(TestConection.USERNAME, TestConection.PASSWORD))
 
-    issuekey = conexao.issue('IKSWN-10026')
+    issuekey = conexao.issue('IKSWN-10092')
     valor = issuekey.raw['fields']['comment']['total']
 
     i = 0
