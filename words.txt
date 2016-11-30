@@ -1,78 +1,78 @@
-?
-are you
-can you
-can you check
-can you help
-can you help me
-can you help us
-can you please
-can you please try
-can you verify
-check
-confirm
-correct
-could help
-could you
-could you check
-could you help
-could you help me
-could you help us
-could you please
-could you please try
-could you verify
-did we
-did you
-do we
-do you
-does this
-had you
-have you
-help
-help me
-help us
-how
-if you
-is my
-is there
-is this
-please
-please attach
-please check
-please check if
-please help
-please help us
-please provide
-please retest
-please share
-please try
-please update
-please verify
-pls
-pls attach
-pls check
-pls check if
-pls help
-pls help us
-pls provide
-pls retest
-pls share
-pls try
-pls update
-pls verify
-try
-try to check
-what
-what does
-what does it
-what is
-what is the
-what is the difference
-whats the difference
-what is your
-whats your
-would
-would you help
-would you please
-would you pls
-you can
-you have
+?,2
+are you,2
+can you,2
+can you check,3
+can you help,3
+can you help me,3
+can you help us,3
+can you please,3
+can you please try,3
+can you verify,3
+check,2
+confirm,2
+correct,2
+could help,2
+could you,3
+could you check,3
+could you help,3
+could you help me,3
+could you help us,3
+could you please,3
+could you please try,3
+could you verify,3
+did we,1
+did you,1
+do we,1
+do you,1
+does this,1
+had you,1
+have you,1
+help,2
+help me,3
+help us,3
+how,2
+if you,1
+is my,1
+is there,1
+is this,1
+please,2
+please attach,3
+please check,3
+please check if,3
+please help,3
+please help us,3
+please provide,3
+please retest,3
+please share,3
+please try,3
+please update,3
+please verify,3
+pls,2
+pls attach,3
+pls check,3
+pls check if,3
+pls help,3
+pls help us,3
+pls provide,3
+pls retest,3
+pls share,3
+pls try,3
+pls update,3
+pls verify,3
+try,2
+try to check,3
+what,2
+what does,3
+what does it,3
+what is,3
+what is the,3
+what is the difference,3
+whats the difference,3
+what is your,3
+was your,1
+would,2
+would you help,3
+would you please,3
+would you pls,3
+you can,1
+you have,1
