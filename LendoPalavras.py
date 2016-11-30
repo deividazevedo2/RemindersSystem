@@ -18,26 +18,29 @@ def BoyerMooreHorspool(pattern, text):
 
 
 if __name__ == '__main__':
-    text = "Hi, Deivid Lima! Can you verify if issue is reproducible in Nexus 6? " \
-           "If yes, can you help collect bugreport and attach to this CR? Thanks and regards"
+    # text = "Hi, Deivid Lima! Can you verify if issue is reproducible in Nexus 6? " \
+    #        "If yes, can you help collect bugreport and attach to this CR? Thanks and regards"
+    #
+    # arq = open('words.txt', 'r')
+    # palavras = arq.readlines()
+    #
+    # for linha in palavras:
+    #
+    #     c = 0
+    #     pos = 0
+    #     texto = text.upper()[pos:len(text)]
+    #     pattern = linha.strip().upper()
+    #
+    #     while c < len(text):
+    #
+    #         s = BoyerMooreHorspool(pattern.upper(), texto)
+    #
+    #         if s > -1:
+    #             print 'Pattern \"' + pattern + '\" found at position',s+pos
+    #
+    #             pos += s+len(pattern)+1
+    #             texto = text.upper()[pos:len(text)]
+    #         c+=1
 
-    arq = open('words.txt', 'r')
-    palavras = arq.readlines()
+    dic = [{'e1':'c1', 'd1':'k1'},{'e2':'c2', 'd2':'k2'},{'e1':'c1', 'd1':'k1'},{'e3':'c3', 'd3':'k3'},{'e1':'c1', 'd1':'k1'},{'e3':'c3', 'd3':'k3'}]
 
-    for linha in palavras:
-
-        c = 0
-        pos = 0
-        texto = text.upper()[pos:len(text)]
-        pattern = linha.strip().upper()
-
-        while c < len(text):
-
-            s = BoyerMooreHorspool(pattern.upper(), texto)
-
-            if s > -1:
-                print 'Pattern \"' + pattern + '\" found at position',s+pos
-
-                pos += s+len(pattern)+1
-                texto = text.upper()[pos:len(text)]
-            c+=1
