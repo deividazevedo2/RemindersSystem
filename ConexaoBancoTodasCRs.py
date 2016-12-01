@@ -103,6 +103,7 @@ if __name__ == '__main__':
     lista = []
     unique = [x for x in dic if x not in lista and (lista.append(x) or True)]
     print unique
+    print len(unique)
     #print dic
 
     #for elemento in dic:
