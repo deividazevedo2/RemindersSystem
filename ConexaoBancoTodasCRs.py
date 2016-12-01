@@ -99,9 +99,11 @@ def select_all_data(user):
     return requests.post(server_request, data=data).json()
 
 if __name__ == '__main__':
-    dic = select_all_data('deivid')
+    dic = select_all_data('irnonato')
     lista = []
-    print dic
+    unique = [x for x in dic if x not in lista and (lista.append(x) or True)]
+    print unique
+    #print dic
 
     #for elemento in dic:
 
