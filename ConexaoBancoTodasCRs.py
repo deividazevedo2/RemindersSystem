@@ -4,71 +4,19 @@
 import json
 import requests
 import TestConection
+import AnaliseDeComentariosBancoDeDados
+
+from easygui import *
 
 USER = TestConection.USERNAME
 PASSWORD = TestConection.PASSWORD
 
-#"SELECT r.pname as resolution, p.pkey as project, ja.actionbody as jiraaction " \
-#"FROM jiraissue i, resolution r, project p, jiraaction ja " \
-#"WHERE i.resolution = r.id  AND i.project = p.id AND ja.issueid = i.id " \
-#"AND i.issuenum = % s AND p.pkey = '%s' ORDER BY ja.created DESC" % (issue_num, project_key)
-
+# Este método realiza a busca de informações de uma CR. Utiliza as informações da tabela
 def JSQL_get_cr_informations(project_key, issue_num):
     sql_query = "SELECT p.pkey as project, ja.actionbody as jiraaction, ja.author as author " \
                 "FROM jiraissue i, project p, jiraaction ja " \
                 "WHERE i.project = p.id AND ja.issueid = i.id " \
                 "AND i.issuenum = % s AND p.pkey = '%s' ORDER BY ja.created DESC" % (issue_num, project_key)
-
-    data = json.dumps({
-        "real_time": 1,
-        "sql": sql_query})
-
-    server_request = '%s/%s/%s/%s' % ('http://jsql.mot.com/rest', 'query/', USER, PASSWORD)
-
-    return requests.post(server_request, data=data).json()
-
-def JSQL_get_comment_of_tc(issue_num):
-    sql_query = "SELECT ja.actionbody " \
-                "FROM jiraaction ja " \
-                "JOIN jiraissue ji ON ja.issueid = ji.id " \
-                "WHERE ja.actiontype = 'comment' AND ji.issuenum = %s AND ROWNUM = 1" \
-                "ORDER BY ja.created DESC" % (issue_num)
-
-    data = json.dumps({"real_time": 1,
-                       #"jira": "dalek",
-                       "sql": sql_query})
-
-    server_request = '%s/%s/%s/%s' % ('http://jsql.mot.com/rest', 'query/', USER, PASSWORD)
-
-    return requests.post(server_request, data=data).json()
-
-#mexendo nesse método.. estou alterando algumas coisas pra ver se consigo capturar os comentários...
-# O método que foi passado pra gente nao está capturando nenhum comentário do issue..
-def JSQL_get_comment_of_tc2(issuenum):
-    sql_query = "SELECT ja.actionbody, ja.author " \
-                "FROM jiraaction ja " \
-                "JOIN jiraissue ji ON ja.issueid = ji.id " \
-                "WHERE ja.actiontype = 'comment' AND ji.issuenum = % s " \
-                "ORDER BY ja.created DESC" % (issuenum)
-
-    data = json.dumps({"real_time": 1,
-                       #"jira": "dalek",
-                       "sql": sql_query})
-
-    server_request = '%s/%s/%s/%s' % ('http://jsql.mot.com/rest', 'query/', USER, PASSWORD)
-
-    return requests.post(server_request, data=data).json()
-
-def JSQL_get_cr_informations2(project_key, issue_num):
-    sql_query = "SELECT ja.actionbody " \
-                "FROM jiraaction ja, jiraissue i, project p " \
-                "JOIN jiraissue ji ON ja.issueid = ji.id " \
-                "WHERE ja.actiontype = 'comment' " \
-                "AND i.project = p.id " \
-                "AND ji.issuenum = '%s' " \
-                "AND p.pkey = '%s' " \
-                "AND ROWNUM = 1 " \
-                "ORDER BY ja.created DESC" % (project_key, issue_num)
 
     data = json.dumps({
         "real_time": 1,
@@ -99,24 +47,74 @@ def select_all_data(user):
     return requests.post(server_request, data=data).json()
 
 if __name__ == '__main__':
-    dic = select_all_data('irnonato')
+
+    #msg = "Do you want to continue?"
+    #msgbox('Testing with EasyGUI')
+
+    # msg = "Enter logon information"
+    # title = "Demo of multpasswordbox"
+    # fieldNames = ["Server ID", "User ID", "Password"]
+    # fieldValues = []  # we start with blanks for the values
+    #
+    # passwordbox(msg='Enter your password.', title=' ', default='')
+
+    coreId = enterbox("Enter with your Lenovo Core ID")
+    msgbox("Searching requests for CRs opened by " + coreId + ". \nPlease, look at the console!")
+
+    # coreId = 'deivid'
+
+    dic = select_all_data(coreId)
     lista = []
     unique = [x for x in dic if x not in lista and (lista.append(x) or True)]
-    print unique
-    print len(unique)
-    #print dic
 
-    #for elemento in dic:
+    print 'Este usuario tem ', len(unique), ' CRs abertas!'
 
-    # dic = JSQL_get_cr_informations('IKSWN','11775')
-    # cont = 1
-    # for list in dic:
-    #     lista = list
-    #     if lista.get('AUTHOR') != 'deivid':
-    #         AnaliseDeComentariosBancoDeDados.analise(lista.get('JIRAACTION').upper())
-    #     else:
-    #         break
+    for valor in unique:
 
-        #print lista.get('ACTIONBODY').upper()
-    #print dic
-    #JSQL_get_tc_custom_fields("IKSWN-10092")
+        cr = JSQL_get_cr_informations(valor.get('PROJECT'), valor.get('ISSUENUM'))
+        link = valor.get('PROJECT')+'-'+valor.get('ISSUENUM')
+
+        print 'ANALISANDO... \nCR: ', link
+
+        request = 0
+        notrequest = 0
+
+        for comment in cr:
+            listaDeRelevancias = []
+            if comment.get('AUTHOR') != coreId:
+                resultado = AnaliseDeComentariosBancoDeDados.analise(comment.get('JIRAACTION').upper(), coreId,
+                                                                     listaDeRelevancias)
+                print resultado
+                if AnaliseDeComentariosBancoDeDados.analisando_prioridades(resultado):
+                    if AnaliseDeComentariosBancoDeDados.mencionou_usuario(resultado):
+                        request+=5
+                    request+=1
+                else:
+                    notrequest+=1
+
+                print 'requests: ', request
+                print 'notrequests: ', notrequest
+
+            else:
+                break
+
+            #print comment.get('ACTIONBODY').upper()
+
+        if request > notrequest:
+            print 'REQUEST ENCONTRADO: https://idart.mot.com/browse/' + link
+        else:
+            print 'NAO TEM REQUEST'
+    # for elemento in unique:
+    #
+    #     dic = JSQL_get_cr_informations(unique.get(''),'11775')
+    #     cont = 1
+    #     for list in dic:
+    #         lista = list
+    #         if lista.get('AUTHOR') != 'deivid':
+    #             AnaliseDeComentariosBancoDeDados.analise(lista.get('JIRAACTION').upper())
+    #         else:
+    #             break
+    #
+    #         print lista.get('ACTIONBODY').upper()
+    #     print dic
+    #     JSQL_get_tc_custom_fields("IKSWN-10092")
