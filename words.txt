@@ -1,78 +1,80 @@
-?,2
-are you,2
-can you,2
-can you check,3
-can you help,3
-can you help me,3
-can you help us,3
-can you please,3
-can you please try,3
-can you verify,3
-check,2
-confirm,2
-correct,2
-could help,2
-could you,3
-could you check,3
-could you help,3
-could you help me,3
-could you help us,3
-could you please,3
-could you please try,3
-could you verify,3
-did we,1
-did you,1
-do we,1
-do you,1
-does this,1
-had you,1
-have you,1
-help,2
-help me,3
-help us,3
-how,2
-if you,1
-is my,1
-is there,1
-is this,1
-please,2
-please attach,3
-please check,3
-please check if,3
-please help,3
-please help us,3
-please provide,3
-please retest,3
-please share,3
-please try,3
-please update,3
-please verify,3
-pls,2
-pls attach,3
-pls check,3
-pls check if,3
-pls help,3
-pls help us,3
-pls provide,3
-pls retest,3
-pls share,3
-pls try,3
-pls update,3
-pls verify,3
-try,2
-try to check,3
-what,2
-what does,3
-what does it,3
-what is,3
-what is the,3
-what is the difference,3
-whats the difference,3
-what is your,3
-was your,1
-would,2
-would you help,3
-would you please,3
-would you pls,3
-you can,1
-you have,1
+? ,3
+are you ,2
+can we ,1
+can you ,2
+can you check ,4
+can you help ,4
+can you help me ,4
+can you help us ,4
+can you please ,4
+can you please try ,5
+can you please share ,5
+can you verify ,4
+check ,1
+confirm ,1
+correct ,1
+could help ,3
+could you ,4
+could you check ,5
+could you help ,5
+could you help me ,5
+could you help us ,5
+could you please ,5
+could you please try ,5
+could you verify ,4
+did we ,1
+did you ,1
+do we ,1
+do you ,1
+does this ,1
+had you ,1
+have you ,2
+help ,1
+help me ,4
+help us ,4
+how ,1
+if you ,1
+is my ,1
+is there ,1
+is this ,1
+please ,2
+please attach ,5
+please check ,4
+please check if ,4
+please help ,4
+please help us ,4
+please provide ,4
+please retest ,5
+please share ,3
+please try ,3
+please update ,3
+please verify ,3
+pls ,2
+pls attach ,5
+pls check ,4
+pls check if ,4
+pls help ,4
+pls help us ,4
+pls provide ,4
+pls retest ,5
+pls share ,3
+pls try ,3
+pls update ,3
+pls verify ,3
+try ,1
+try to check ,3
+what ,2
+what does ,3
+what does it ,3
+what is ,3
+what is the ,3
+what is the difference ,3
+whats the difference ,3
+what is your ,3
+was your ,1
+would ,1
+would you help ,4
+would you please ,4
+would you pls ,4
+you can ,1
+you have ,1
