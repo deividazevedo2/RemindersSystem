@@ -1,3 +1,5 @@
+import string
+
 def alphabet_index(c):
     """
     Returns the index of the given character in the English alphabet, counting from 0.
@@ -175,7 +177,12 @@ def BoyerMooreHorspool(pattern, text):
 
 
 if __name__ == '__main__':
-    text = "Hi, Deivid Lima! Can you verify if issue is reproducible in Nexus 6? If yes, can you collect bugreport and attach to this CR? Thanks and regards"
+    text1 = "Hi, Deivid Lima! Can you verify if issue is reproducible in Nexus 6? If yes, can you collect bugreport and attach to this CR? Thanks and regards"
+
+    safe_chars = string.ascii_letters + string.digits + ' ' + '?'
+    text = ''.join([char if char in safe_chars else '' for char in text1])
+
+    print text
 
     valores = text.split()
     #print valores
