@@ -122,18 +122,12 @@ def analise(texto, coreId, listaDeRelevancias):
             listaDeRelevancias.append('MENCIONA O DONO')
         else:
             listaDeRelevancias.append('NAO MENCIONA O DONO')
-            # listaDeRelevancias.append('MENCIONA O DONO')
-        # else:
-            # listaDeRelevancias.append('NAO MENCIONA O DONO')
     else:
         listaDeRelevancias.append('NAO MENCIONA NINGUEM')
 
-    # if texto.find(coreId.upper()) > -1:
-    #     listaDeRelevancias.append('MENCIONA O DONO')
-
     if qtpattern == 1:
 
-        if valor == 3 or valor == 4 or valor == 5:
+        if valor >= 3:
             listaDeRelevancias.append("ALTA RELEVANCIA")
         if valor == 2:
             listaDeRelevancias.append("MEDIA RELEVANCIA")
@@ -158,13 +152,18 @@ def mencionou_usuario(resultado):
             return True
 
 def analisando_prioridades(resultado):
-    if resultado[0] >= 0:
-        if resultado[3] > 0 or resultado[4] > 3 or resultado[5] > 3:
+    if resultado[0] == 0:
+        if resultado[2] > 0:
+            return True
+        else:
+            return False
+    if resultado[0] > 0:
+        if resultado[3] > 0 or resultado[4] > 0:
             return True
         else:
             return False
     if resultado[1] > 0:
         if resultado[2] == 0:
             return False
-        elif resultado[3] > 0 or resultado[4] > 3 or resultado[5] > 3:
-            return False
+        else:
+            return True

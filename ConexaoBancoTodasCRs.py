@@ -46,35 +46,20 @@ def select_all_data(user):
 
     return requests.post(server_request, data=data).json()
 
-if __name__ == '__main__':
-
-    #msg = "Do you want to continue?"
-    #msgbox('Testing with EasyGUI')
-
-    # msg = "Enter logon information"
-    # title = "Demo of multpasswordbox"
-    # fieldNames = ["Server ID", "User ID", "Password"]
-    # fieldValues = []  # we start with blanks for the values
-    #
-    # passwordbox(msg='Enter your password.', title=' ', default='')
-
-    coreId = enterbox("Enter with your Lenovo Core ID")
-    msgbox("Searching requests for CRs opened by " + coreId + ". \nPlease, look at the console!")
-
-    # coreId = 'deivid'
+def verifica(coreId):
 
     dic = select_all_data(coreId)
     lista = []
     unique = [x for x in dic if x not in lista and (lista.append(x) or True)]
 
-    print 'Este usuario tem ', len(unique), ' CRs abertas!'
+    print 'The User has ', len(unique), ' opened CRs!'
 
     for valor in unique:
 
         cr = JSQL_get_cr_informations(valor.get('PROJECT'), valor.get('ISSUENUM'))
-        link = valor.get('PROJECT')+'-'+valor.get('ISSUENUM')
+        link = valor.get('PROJECT') + '-' + valor.get('ISSUENUM')
 
-        print 'ANALISANDO... \nCR: ', link
+        print 'ANALYSING... \nCR: ', link
 
         request = 0
         notrequest = 0
@@ -84,37 +69,27 @@ if __name__ == '__main__':
             if comment.get('AUTHOR') != coreId:
                 resultado = AnaliseDeComentariosBancoDeDados.analise(comment.get('JIRAACTION').upper(), coreId,
                                                                      listaDeRelevancias)
-                print resultado
+                # print resultado
                 if AnaliseDeComentariosBancoDeDados.analisando_prioridades(resultado):
                     if AnaliseDeComentariosBancoDeDados.mencionou_usuario(resultado):
-                        request+=5
-                    request+=1
+                        request += 5
+                    request += 1
                 else:
-                    notrequest+=1
-
-                print 'requests: ', request
-                print 'notrequests: ', notrequest
+                    notrequest += 1
 
             else:
                 break
+        # print 'request ',request
+        # print 'notrequest ', notrequest
 
-            #print comment.get('ACTIONBODY').upper()
-
-        if request > notrequest:
-            print 'REQUEST ENCONTRADO: https://idart.mot.com/browse/' + link
+        if request >= notrequest and (request != 0):
+            print 'REQUEST FOUND AT: https://idart.mot.com/browse/' + link
         else:
-            print 'NAO TEM REQUEST'
-    # for elemento in unique:
-    #
-    #     dic = JSQL_get_cr_informations(unique.get(''),'11775')
-    #     cont = 1
-    #     for list in dic:
-    #         lista = list
-    #         if lista.get('AUTHOR') != 'deivid':
-    #             AnaliseDeComentariosBancoDeDados.analise(lista.get('JIRAACTION').upper())
-    #         else:
-    #             break
-    #
-    #         print lista.get('ACTIONBODY').upper()
-    #     print dic
-    #     JSQL_get_tc_custom_fields("IKSWN-10092")
+            print 'REQUEST NOT FOUND'
+
+def search_requests():
+
+    coreId = enterbox("Enter with your Lenovo Core ID")
+    msgbox("Searching requests for CRs opened by " + coreId + ". \nPlease, look at the console!")
+
+    verifica(coreId)
