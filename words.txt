@@ -1,5 +1,6 @@
 ? ,3
 are you ,2
+Can someone try ,2
 can we ,1
 can you ,2
 can you check ,4
@@ -10,7 +11,6 @@ can you please ,4
 can you please try ,5
 can you please share ,5
 can you verify ,4
-check ,1
 confirm ,1
 correct ,1
 could help ,3
@@ -41,10 +41,16 @@ please ,2
 please attach ,5
 please check ,4
 please check if ,4
+please confirm ,5
+please confirm if ,5
 please help ,4
 please help us ,4
 please provide ,4
 please retest ,5
+please retest on nexus ,8
+please retest on build ,8
+please retest on latest ,8
+please retest on ,5
 please share ,3
 please try ,3
 please update ,3
@@ -53,10 +59,16 @@ pls ,2
 pls attach ,5
 pls check ,4
 pls check if ,4
+pls confirm ,5
+pls confirm if ,5
 pls help ,4
 pls help us ,4
 pls provide ,4
 pls retest ,5
+pls retest on nexus ,8
+pls retest on build ,8
+pls retest on latest ,8
+pls retest on ,5
 pls share ,3
 pls try ,3
 pls update ,3
@@ -67,10 +79,11 @@ what ,2
 what does ,3
 what does it ,3
 what is ,3
-what is the ,3
+what is the ,4
 what is the difference ,3
 whats the difference ,3
 what is your ,3
+why ,1
 was your ,1
 would ,1
 would you help ,4
